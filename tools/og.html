@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>og</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+      :root { color-scheme: light; --bg:#f6f4ef; --fg:#17150f; --muted:#6a6459; --rule:#ddd8cd; --accent:#b0441a; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); color: var(--fg); }
+      .og { display: grid; grid-template-columns: 1fr 470px; height: 630px; }
+      .text { padding: 84px 72px; display: flex; flex-direction: column; }
+      .text img { width: 88px; height: 88px; border-radius: 50%; }
+      .name { margin: 44px 0 0; font: 600 76px/1 var(--sans); letter-spacing: -0.03em; }
+      .role { margin: 20px 0 0; font: 400 28px/1.35 var(--sans); color: var(--muted); }
+      .url { margin-top: auto; font: 400 24px var(--mono); color: var(--accent); }
+      .photo { background: url("/_og-photo.webp") 78% center / cover; }
+    </style>
+  </head>
+  <body>
+    <div class="og">
+      <div class="text">
+        <img src="/assets/img/avatar.webp" alt="">
+        <p class="name">Braden Wagner</p>
+        <p class="role">Computer Engineering<br>San José State University</p>
+        <p class="url">bwagner.dev</p>
+      </div>
+      <div class="photo"></div>
+    </div>
+  </body>
+</html>

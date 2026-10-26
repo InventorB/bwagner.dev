@@ -1,0 +1,417 @@
+/* bwagner.dev */
+
+@font-face {
+  font-family: "Plex Sans";
+  src: url("/assets/fonts/plex-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Sans";
+  src: url("/assets/fonts/plex-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Sans";
+  src: url("/assets/fonts/plex-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("/assets/fonts/plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #f6f4ef;
+  --fg: #17150f;
+  --muted: #6a6459;
+  --rule: #ddd8cd;
+  --guide: #c4bcad; /* tree lines for sub-links */
+  --accent: #b0441a; /* pulled from the sunset photo */
+  --photo-edge: rgb(23 21 15 / 0.08);
+
+  --sans: "Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-3: clamp(2.25rem, 1.6rem + 2.8vw, 3.25rem);
+
+  --measure: 38rem;
+  --gutter: clamp(1.25rem, 5vw, 2rem);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121110;
+    --fg: #ece8e1;
+    --muted: #9d978c;
+    --rule: #2b2925;
+    --guide: #46423b;
+    --accent: #ee8a4e;
+    --photo-edge: rgb(236 232 225 / 0.08);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 160ms var(--ease), text-decoration-color 160ms var(--ease);
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -3rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+  z-index: 1;
+}
+.skip:focus {
+  top: 1rem;
+}
+
+/* Fills the viewport so the footer sits at the bottom; spacing scales with
+   height so the whole page fits on a laptop screen without scrolling */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vh, 6rem) var(--gutter) clamp(1rem, 3vh, 2.5rem);
+}
+
+/* Intro */
+
+.intro {
+  margin-bottom: clamp(1.75rem, 4.5vh, 3.5rem);
+}
+
+.id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.avatar {
+  flex: none;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--photo-edge);
+}
+
+@media (min-width: 40rem) {
+  .id {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .avatar {
+    width: 6.25rem;
+    height: 6.25rem;
+  }
+}
+
+h1 {
+  margin: 0;
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.role {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: var(--step-1);
+  line-height: 1.4;
+}
+
+.role span {
+  white-space: nowrap;
+}
+
+.bio {
+  margin: 1.25rem 0 0;
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+/* Sections */
+
+main {
+  margin-bottom: clamp(2rem, 4.5vh, 4rem);
+}
+
+section + section {
+  margin-top: 3.5rem;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* Links */
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.links > li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.links a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  min-height: 3.25rem;
+  padding: 0.8rem 0;
+  text-decoration: none;
+}
+
+.links .label {
+  font-weight: 500;
+}
+
+.links .handle {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 160ms var(--ease);
+}
+
+.links .arrow {
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  align-self: center;
+  color: var(--muted);
+  transition: transform 200ms var(--ease), color 160ms var(--ease);
+}
+
+.links a:hover .handle,
+.links a:hover .arrow {
+  color: var(--accent);
+}
+
+.links a:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Sub-links: nested lists drawn as a file tree under their parent row */
+
+.links li:has(> .sublinks) > a {
+  padding-bottom: 0.35rem;
+}
+
+.sublinks {
+  --sub-pad: 0.6rem; /* row padding; the connector lines up with it */
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.375rem;
+}
+
+.links > li > .sublinks {
+  padding-bottom: 0.35rem;
+}
+
+.sublinks > li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+/* └ connector from the parent down to this row's label */
+.sublinks > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -0.35rem;
+  width: 0.75rem;
+  height: calc(0.35rem + var(--sub-pad) + 0.8rem); /* to the label's midline */
+  border-left: 1px solid var(--guide);
+  border-bottom: 1px solid var(--guide);
+  border-bottom-left-radius: 4px;
+}
+
+/* ├ — continue the vertical line past rows that have siblings below */
+.sublinks > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--guide);
+}
+
+.sublinks a {
+  min-height: 0;
+  padding: var(--sub-pad) 0;
+}
+
+.sublinks .label {
+  font-weight: 400;
+}
+
+/* Indented rows run out of room on phones; keep the label, drop the handle */
+@media (max-width: 30rem) {
+  .sublinks .handle {
+    display: none;
+  }
+  .sublinks .arrow {
+    margin-left: auto;
+  }
+}
+
+/* Mouse/trackpad: tighter rows so the page fits a laptop screen.
+   Touch screens keep the taller rows above for comfortable tap targets. */
+@media (pointer: fine) {
+  .links a {
+    min-height: 0;
+    padding: 0.65rem 0;
+  }
+  .sublinks {
+    --sub-pad: 0.3rem;
+  }
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Single-message pages (404) */
+
+.notice h1 {
+  font-size: var(--step-3);
+}
+
+.notice p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+/* One gentle entrance; skipped entirely for reduced motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  .page > * {
+    animation: rise 520ms var(--ease) both;
+  }
+  .page > :nth-child(2) {
+    animation-delay: 60ms;
+  }
+  .page > :nth-child(3) {
+    animation-delay: 120ms;
+  }
+  .page > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+@media print {
+  .skip {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+# Link checking for CI (lycheeverse/lychee-action)
+
+# LinkedIn answers automated requests with 999
+accept = ["200..=299", "999"]
+
+exclude = [
+  # The site's own canonical/OG URLs; they 404 until the first deploy is live
+  '^https://bwagner\.dev',
+  # Unsplash puts a bot challenge in front of every page (401 for crawlers)
+  '^https://unsplash\.com',
+  # Single-page app on GitHub Pages: deep links are served by its 404.html
+  # (status 404) and routed client-side, so they work in a browser
+  '^https://sjsuroboticsteam\.github\.io/urc-teleoperation-2026/.+',
+]
+
+# robots.txt / sitemap.xml are not HTML and contain only self-links
+exclude_path = ["site/robots.txt", "site/sitemap.xml"]
+
+max_retries = 3
+timeout = 20
